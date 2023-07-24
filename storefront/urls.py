@@ -15,8 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+
+# If we send a request to playground/hello
+# Django knows that anything that starts with playground/ should be sent to the app in the include function
+# So the request url get chopped off to /hello, and then gets sent to the playground app to respond
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('playground/', include('playground.urls'))
 ]
