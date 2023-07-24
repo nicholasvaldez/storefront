@@ -40,7 +40,7 @@ class Customer(models.Model):
     phone = models.CharField(max_length=255)
     birth_date = models.DateField(null=True)
     membership = models.CharField(
-        max_length=1, choices=MEMBERSHIP_BRONZE, default=MEMBERSHIP_BRONZE)
+        max_length=1, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE)
 
 
 class Order(models.Model):
@@ -77,7 +77,8 @@ class Cart(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-class CartItme(models.Model):
+class CartItem(models.Model):
     cart = models.ForeignKey(Product, on_delete=models.CASCADE)
-    Product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(
+        Product, on_delete=models.CASCADE, related_name='+')
     quantity = models.PositiveSmallIntegerField()
